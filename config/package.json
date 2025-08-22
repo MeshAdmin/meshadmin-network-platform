@@ -1,0 +1,93 @@
+{
+  "name": "meshadmin-network-platform",
+  "version": "1.0.0",
+  "description": "Comprehensive network topology design, mapping, and visualization suite with advanced diagramming capabilities",
+  "private": true,
+  "type": "module",
+  "homepage": "https://meshadmin.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MeshAdmin/meshadmin-network-platform.git"
+  },
+  "author": {
+    "name": "MeshAdmin",
+    "email": "info@meshadmin.com",
+    "url": "https://meshadmin.com"
+  },
+  "license": "AGPL-3.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.1",
+  "scripts": {
+    "build": "pnpm --recursive --stream build",
+    "dev": "pnpm --recursive --parallel --stream dev",
+    "test": "pnpm --recursive test",
+    "test:coverage": "pnpm --recursive test:coverage",
+    "lint": "pnpm --recursive lint",
+    "lint:fix": "pnpm --recursive lint:fix",
+    "type-check": "pnpm --recursive type-check",
+    "clean": "pnpm --recursive clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,tsx,json,md}\"",
+    "prepare": "husky install",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vitejs/plugin-react": "^4.6.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "turbo": "^1.12.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "^18.2.55",
+      "@types/react-dom": "^18.2.19"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "network",
+    "topology",
+    "visualization",
+    "diagramming",
+    "network-design",
+    "network-mapping",
+    "network-planning",
+    "infrastructure",
+    "meshadmin",
+    "mptcp"
+  ],
+  "dependencies": {
+    "events": "^3.3.0",
+    "winston": "^3.11.0"
+  }
+}

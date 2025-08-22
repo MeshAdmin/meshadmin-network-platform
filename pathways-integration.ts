@@ -141,7 +141,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
       
       return true;
     } catch (error) {
-      console.error('❌ Network Platform: Failed to connect to kernel:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       this.connected = false;
       return false;
     }
@@ -168,7 +168,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
       this.emit('disconnected', { timestamp: Date.now() });
       console.log('✅ Network Platform: Disconnected from unified MPTCP kernel');
     } catch (error) {
-      console.error('❌ Network Platform: Error during disconnect:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
     }
   }
 
@@ -203,7 +203,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
         return this.topology;
       }
     } catch (error) {
-      console.error('❌ Network Platform: Error getting topology:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       return this.topology;
     }
   }
@@ -226,7 +226,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
       console.log(`✅ Network Platform: Discovered ${enhancedTopology.nodes.length} nodes, ${enhancedTopology.paths.length} paths`);
       return enhancedTopology;
     } catch (error) {
-      console.error('❌ Network Platform: Discovery failed:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       return this.topology;
     }
   }
@@ -246,7 +246,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
       }
       return this.topology.paths;
     } catch (error) {
-      console.error('❌ Network Platform: Error getting path metrics:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       return this.topology.paths;
     }
   }
@@ -266,7 +266,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
       }
       return this.topology.connections;
     } catch (error) {
-      console.error('❌ Network Platform: Error getting connections:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       return this.topology.connections;
     }
   }
@@ -292,7 +292,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
       
       return { success: false, error: optimizationResult.error };
     } catch (error) {
-      console.error('❌ Network Platform: Path optimization failed:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       return { success: false, error: error.message };
     }
   }
@@ -316,7 +316,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
           throw new Error(`Unsupported export format: ${format}`);
       }
     } catch (error) {
-      console.error('❌ Network Platform: Export failed:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       return '';
     }
   }
@@ -370,7 +370,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
 
       return recommendations;
     } catch (error) {
-      console.error('❌ Network Platform: Recommendation generation failed:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       return [];
     }
   }
@@ -381,7 +381,7 @@ export class NetworkPlatformPathwaysIntegration extends EventEmitter {
 
   private setupErrorHandling(): void {
     this.on('error', (error) => {
-      console.error('🔥 Network Platform: Error event:', error);
+      errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
     });
 
     process.on('SIGINT', () => {
@@ -505,7 +505,7 @@ if (require.main === module) {
       try {
         await this.discoverMPTCPTopology();
       } catch (error) {
-        console.error('❌ Network Platform: Discovery error:', error);
+        errorHandler.handleError(error, { service: \'meshadmin-network-platform\' });
       }
     }, this.config.discoveryInterval);
 
